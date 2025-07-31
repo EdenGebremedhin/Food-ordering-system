@@ -13,7 +13,7 @@ const generateToken = (user) => {
 exports.registerUser = async (req, res) => {
   console.log("📩 Register Request Body:", req.body);
 
-  const { name, email, password } = req.body;
+  const { name, email, password, role } = req.body;
 
   if (!name || !email || !password) {
     console.log("❌ Missing fields");
