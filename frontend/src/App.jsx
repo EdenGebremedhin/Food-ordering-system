@@ -1,27 +1,25 @@
-import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
 import Menu from "./pages/Menu";
-import Orders from "./pages/Orders";
-import AdminOrders from "./pages/AdminOrders";
-import AdminMenu from "./pages/AdminMenu"; // ✅ New page
+import Cart from "./pages/Cart";
+import Login from "./pages/Login";
+import Footer from "./components/Footer";
 
 function App() {
   return (
     <Router>
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/menu" element={<Menu />} />
-        <Route path="/orders" element={<Orders />} />
-        <Route path="/admin-orders" element={<AdminOrders />} />
-        <Route path="/admin-menu" element={<AdminMenu />} /> {/* ✅ New Admin UI */}
-      </Routes>
+      <main style={{ minHeight: "80vh" }}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/menu" element={<Menu />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/login" element={<Login />} />
+          {/* You can add Register, Orders, Admin Orders here later */}
+        </Routes>
+      </main>
+      <Footer />
     </Router>
   );
 }

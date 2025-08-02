@@ -1,5 +1,6 @@
 import { useState } from "react";
 import API from "../api";
+import "../styles/Auth.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");

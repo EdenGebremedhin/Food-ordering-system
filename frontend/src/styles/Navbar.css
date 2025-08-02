@@ -1,48 +1,97 @@
+/* General Navbar Styles */
 .navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: #264653;
+  color: #fff;
+  position: relative;
+  z-index: 10;
+}
+
+.navbar-logo {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+/* Desktop Links */
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.navbar-links a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navbar-links a:hover {
+  color: #2a9d8f;
+}
+
+/* Logout Button */
+.logout-btn {
+  background: #e76f51;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s ease;
+}
+
+.logout-btn:hover {
+  background: #d65a3b;
+}
+
+/* Hamburger Menu */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background: white;
+  border-radius: 2px;
+}
+
+/* Mobile Menu */
+@media (max-width: 768px) {
+  .hamburger {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    background: #264653;
-    color: #fff;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
-  
-  .navbar-logo {
-    font-size: 1.6rem;
-    font-weight: bold;
-    color: #fff;
-  }
-  
+
   .navbar-links {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background: #264653;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 200px;
+    padding: 1rem;
+    display: none;
+    border-radius: 0 0 0 10px;
+  }
+
+  .navbar-links.active {
     display: flex;
-    align-items: center;
-    gap: 1.2rem;
   }
-  
-  .navbar-links a {
-    text-decoration: none;
-    color: #fff;
-    font-weight: 500;
-    transition: color 0.3s ease;
-  }
-  
-  .navbar-links a:hover {
-    color: #2a9d8f;
-  }
-  
+
+  .navbar-links a,
   .logout-btn {
-    background: #e76f51;
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: 500;
-    transition: background 0.3s ease;
+    width: 100%;
+    text-align: left;
+    padding: 0.6rem 0;
   }
-  
-  .logout-btn:hover {
-    background: #d65a3b;
-  }
-  
+}
