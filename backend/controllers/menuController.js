@@ -1,22 +1,35 @@
-const MenuItem = require("../models/MenuItem");
+const Menu = require("../models/Menu");
 
-// Add menu item (admin only)
-exports.addMenuItem = async (req, res) => {
-  const { name, description, price, category } = req.body;
+exports.getMenu = async (req, res) => {
   try {
-    const newItem = await MenuItem.create({ name, description, price, category });
-    res.status(201).json(newItem);
+    const menu = await Menu.find();
+    res.json(menu);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ message: "Error fetching menu" });
   }
 };
 
-// Get all menu items
-exports.getMenuItems = async (req, res) => {
+exports.addMenuItem = async (req, res) => {
   try {
-    const items = await MenuItem.find();
-    res.json(items);
+    const { name, price } = req.body;
+    if (!name || !price) return res.status(400).json({ message: "Name and price are required" });
+
+    const newItem = new Menu({ name, price });
+    await newItem.save();
+    res.status(201).json(newItem);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ message: "Error adding menu item" });
+  }
+};
+
+exports.deleteMenuItem = async (req, res) => {
+  try {
+    const item = await Menu.findById(req.params.id);
+    if (!item) return res.status(404).json({ message: "Menu item not found" });
+
+    await item.deleteOne();
+    res.json({ message: "Menu item deleted" });
+  } catch (error) {
+    res.status(500).json({ message: "Error deleting menu item" });
   }
 };
