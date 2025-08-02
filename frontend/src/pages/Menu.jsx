@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import API from "../api";
+import "../styles/Menu.css";  // import the CSS file
+
 
 const Menu = () => {
   const [menu, setMenu] = useState([]);

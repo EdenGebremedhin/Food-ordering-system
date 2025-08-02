@@ -1,22 +1,27 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import API from "../api";
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const fetchOrders = async () => {
     try {
       const { data } = await API.get("/orders");
       setOrders(data);
     } catch (error) {
-      console.error(error);
-      alert("Failed to fetch orders");
+      console.error("Failed to fetch orders:", error);
+      setOrders([]);
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
     fetchOrders();
   }, []);
+
+  if (loading) return <p>Loading your orders...</p>;
 
   return (
     <div>
@@ -26,11 +31,13 @@ const Orders = () => {
       ) : (
         <ul>
           {orders.map((order) => (
-            <li key={order._id}>
+            <li key={order._id} style={{ marginBottom: "20px" }}>
               <strong>Status:</strong> {order.status} | <strong>Total:</strong> ${order.totalPrice}
               <ul>
                 {order.items.map((item, index) => (
-                  <li key={index}>{item.menuItem.name} x {item.quantity}</li>
+                  <li key={index}>
+                    {item.menuItem?.name || "Unknown"} x {item.quantity}
+                  </li>
                 ))}
               </ul>
             </li>
